@@ -8,6 +8,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Button,
+  TextInput,
+  Alert,
 } from "react-native";
 export default function App() {
   const [listNV, setListNV] = useState([
@@ -19,6 +21,20 @@ export default function App() {
     { key: "Joel", sdt: "098787899" },
     { key: "John", sdt: "078997899" },
   ]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleEmail = (inputEmail) => {
+    setEmail(inputEmail);
+  };
+
+  const handlePassword = (inputPassword) => {
+    setPassword(inputPassword);
+  };
+
+  const handleLogin = () => {
+    Alert.alert("Login", `Email: ${email}, Password: ${password}`);
+  };
 
   return (
     <SafeAreaView>
@@ -57,7 +73,7 @@ export default function App() {
           <Button
             title="Add"
             onPress={() => {
-              listNV.push({ key: "Long", sdt: "0987555889" });
+              listNV.push({ key: "Cường", sdt: "0987555889" });
               console.log(listNV);
               setListNV(listNV);
             }}
@@ -72,6 +88,22 @@ export default function App() {
           />
         </View>
       </View>
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          onChangeText={handleEmail}
+          value={email}
+          placeholder="Enter email"
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={handlePassword}
+          value={password}
+          placeholder="Enter password"
+          secureTextEntry={true}
+        />
+        <Button title="Login" onPress={handleLogin} style={styles.button} />
+      </View>
     </SafeAreaView>
   );
 }
@@ -82,5 +114,22 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     height: 44,
+  },
+  login: {
+    marginTop: 30,
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 16,
+    backgroundColor: "aliceblue",
+  },
+  input: {
+    height: 40,
+    borderColor: "aqua",
+    borderWidth: 1,
+    marginBottom: 12,
+    paddingHorizontal: 10,
+  },
+  button: {
+    color: "blue",
   },
 });
